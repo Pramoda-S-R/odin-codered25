@@ -6,23 +6,62 @@ const IdkBruh = () => {
   const [audio, setAudio] = useState(null);
 
   const sendVideoFrame = async () => {
-    if (videoRef.current) {
+    try {
+      if (!videoRef.current) {
+        console.error("Video element is not available.");
+        return;
+      }
+
+      const videoElement = videoRef.current;
+
+      // Ensure the video element is ready
+      if (videoElement.readyState < 2) {
+        console.error("Video element is not ready.");
+        return;
+      }
+
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
-      canvas.width = videoRef.current.videoWidth;
-      canvas.height = videoRef.current.videoHeight;
-      ctx.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
+      canvas.width = videoElement.videoWidth;
+      canvas.height = videoElement.videoHeight;
+
+      // Check if videoWidth and videoHeight are non-zero
+      if (canvas.width === 0 || canvas.height === 0) {
+        console.error("Video dimensions are not set.");
+        return;
+      }
+
+      ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+
       const blob = await new Promise((resolve) =>
         canvas.toBlob(resolve, "image/jpeg")
       );
 
+      if (!blob) {
+        console.error("Failed to create a blob from the canvas.");
+        return;
+      }
+
+      console.log("Sending video frame with size:", blob.size, "bytes");
+
       const response = await fetch("http://127.0.0.1:5000/video", {
         method: "POST",
         body: blob,
+        headers: {
+          "Content-Type": "application/octet-stream",
+        },
       });
+
+      if (!response.ok) {
+        const error = await response.json();
+        console.error("Error response from server:", error);
+        return;
+      }
 
       const data = await response.json();
       setMessages((prev) => [...prev, data.message]);
+    } catch (error) {
+      console.error("Fetch error:", error);
     }
   };
 

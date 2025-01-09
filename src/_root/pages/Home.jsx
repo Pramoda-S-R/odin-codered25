@@ -5,6 +5,7 @@ import LiveStreamComponent from "../../components/LiveStreamComponent";
 import FrameCapture from "../../components/FrameCapture";
 import AudioCapture from "../../components/AudioCapture";
 import IdkBruh from "../../components/IdkBruh";
+import GeminiLiveDemo from "../../components/AnotherDance";
 
 const Home = () => {
   return (
@@ -12,7 +13,7 @@ const Home = () => {
       Home
       <div className="app container mx-auto p-4">
         <h1 className="text-2xl font-bold mb-4">Conversational Bot</h1>
-        <IdkBruh />
+        <GeminiLiveDemo />
       </div>
     </div>
   );
