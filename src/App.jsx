@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import RootLayout from "./_root/RootLayout";
-import { Home } from "./_root/pages";
+import { Gem, Home } from "./_root/pages";
 
 const App = () => {
   return (
@@ -9,6 +9,7 @@ const App = () => {
       <Routes location={location} key={location.key}>
         <Route element={<RootLayout />}>
           <Route index element={<Home />} />
+          <Route path="/recog" element={<Gem />} />
         </Route>
       </Routes>
     </main>
