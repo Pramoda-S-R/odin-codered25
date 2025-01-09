@@ -27,7 +27,7 @@ const LiveStreamComponent = () => {
     initMedia();
 
     // Setup WebSocket
-    const socket = new WebSocket("ws://yourserver.com/socket");
+    const socket = new WebSocket("ws://localhost:9082");
     socket.onmessage = handleSocketMessage;
     socketRef.current = socket;
 
