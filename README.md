@@ -1,5 +1,4 @@
-The Project ODIN-(Optical Device Intellegent Navigation)
-# Odin: AI-Powered Visual Assistant
+# Odin: Optical Device Intellegent Navigation
 
 **Odin** is an AI-driven visual assistant designed to provide assistance to visually impaired individuals. The system integrates image captioning, obstacle detection, depth estimation, and conversational capabilities to create a powerful, multi-functional tool.
 
